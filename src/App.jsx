@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { useState } from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 
 
 
@@ -7,9 +8,16 @@ function App() {
   
 
   return (
-    <h1 className="text-3xl font-bold underline bg-red-600">
-      Hello world!
-    </h1>
+  <>
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Store />} />
+        <Route exact path="/about" element={<About />} />
+        <Route exact path="/cart" element={<Cart />} />
+      </Routes>
+    </BrowserRouter>
+  </>
   )
 }
 
