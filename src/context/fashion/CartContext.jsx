@@ -1,14 +1,31 @@
 import { createContext, useReducer } from "react";
 import cartReducer from "./CartReducer";
+import { sumItems } from "./CartReducer";
 
 
-const CartContext = createContext();
 
+
+export const CartContext = createContext();
+
+
+//Local Storage
+const storage = localStorage.getItem("cartItems")
+  ? JSON.parse(localStorage.getItem("cartItems"))
+  : [];
 
 export const CartProvider = ({ children }) => {
   // Initial State of the cart
+  // const initialState = {
+  //   cartItems: [],
+  //   checkout: false,
+  // };
+
+
+
+  //Change the code above to that below to get the initial state from local storage
   const initialState = {
-    cartItems: [],
+    cartItems: storage,
+    ...sumItems(storage),
     checkout: false,
   };
 
@@ -17,6 +34,7 @@ export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
 
+  // console.log(state) 
 
 
   // Add item to store from cart
